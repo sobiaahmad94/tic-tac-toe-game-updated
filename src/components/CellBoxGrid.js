@@ -5,23 +5,34 @@ import styled from "styled-components";
 
 // for main title
 const StyledTitle = styled.h1`
-  text-align: center;
-  margin: 0;
-  padding: 20;
+    text-align: center;
+    margin: 0;
+    padding: 20;
+    font-size: 65px;
+`;
+
+// second line
+const StyledTitle2 = styled.h1`
+    color: rgb(51, 153, 204);
+    text-align: center;
+    margin: 0;
+    padding: 20;
+    font-size: 60px;
+
 `;
 
 const StyledStatus = styled.div`
-  text-align: center;
+    text-align: center;
 `;
 
 const StyledCellBoxGridContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const StyledCellBoxGridRow = styled.div`
-  display: flex;
+    display: flex;
 `;
 
 // styling the two buttons below grid
@@ -33,23 +44,38 @@ const StyledCellBoxGridRow = styled.div`
 //     align-items: center;
 
 const StyledClearButton = styled.button`
-  margin-top: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 19px;
+    border-radius: 10px;
+
+:hover {
+    // red to warn that they're about to clear the game
+    background-color: rgb(248, 58, 49);
+
+}
 `;
 
 const StyledPlayAgainButton = styled.button`
-  margin-top: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 19px;
+    border-radius: 10px;
+
 `;
 
 function CellBoxGrid({
-  cellBoxes,
-  setCellBoxes,
-  xPlayerIsNext,
-  setXPlayerIsNext,
-}) {
-  function handleClick(index) {
+    cellBoxes,
+    setCellBoxes,
+    xPlayerIsNext,
+    setXPlayerIsNext,
+}) 
+
+{
+    function handleClick(index) {
     if (cellBoxes[index] || figureOutWinner(cellBoxes)) {
         // if one of the cellBox is already filled or if O or X wins
-      return;
+        return;
     }
     const newCellBoxes = [...cellBoxes]; // creates a copy of the squares array
     // I'm using the spread operator to make a copy of the original array
@@ -61,13 +87,13 @@ function CellBoxGrid({
     setXPlayerIsNext(!xPlayerIsNext);
     // toggles to the current player as if it isn't X player it'll expect O player
 
-  }
+    }
 
-  function fillCellBox(index) {
+    function fillCellBox(index) {
     return <CellBox value={cellBoxes[index]} onClick={() => handleClick(index)} />;
     // fill up a CellBox component with cellBoxValue and onClick prop
 
-  }
+    }
 
    // game logic notes:
 
@@ -85,7 +111,7 @@ function CellBoxGrid({
     // this needs to work for both the X player and O player
     // Return the winner ('X' or 'O') or null if no winner
 
-  function figureOutWinner(cellBoxes) {
+    function figureOutWinner(cellBoxes) {
     const winningLines = [
                 // left to right possible wins
                 [0, 1, 2], 
@@ -116,26 +142,26 @@ function CellBoxGrid({
 
     // iterates over the winningLines array using map
     for (const line of winningLines) {
-      const [a, b, c] = line;
-      if (cellBoxes[a] && cellBoxes[a] === cellBoxes[b] && cellBoxes[a] === cellBoxes[c]) {
+        const [a, b, c] = line;
+        if (cellBoxes[a] && cellBoxes[a] === cellBoxes[b] && cellBoxes[a] === cellBoxes[c]) {
         return cellBoxes[a];
         // return the winner, either X or O
 
-      }
+    }
     }
 
     return null;
     // if no one wins nout returned
 
-  }
+    }
 
   // draw
-  function checkDraw() {
+    function checkDraw() {
     return cellBoxes.every((cell) => cell !== ""); //  function goes through every element in the cellBoxes array to check it's not an empty string. If one of the boxes (buttons kinda) is empty it means that it can't be draw, it's true for all elements, it means that all cells in the game grid have got something inside them, and the function returns true, meaning it's a draw. It returns false otherwise meaning it's not a draw
   }
 
-  const winner = figureOutWinner(cellBoxes); // checking if there's a winner by looking at current state of cellBoxes
-  const status = winner
+const winner = figureOutWinner(cellBoxes); // checking if there's a winner by looking at current state of cellBoxes
+const status = winner
     ? `Congratulations team ${winner}! Player ${winner} is the winner :)` // decides on what player wins and what message should be shown, depending on who wins
     : checkDraw() // draw check added
     ? `Grab a pencil... it's a draw! ✏️` 
@@ -145,7 +171,7 @@ function CellBoxGrid({
     <>
     <div>
       <StyledTitle>Tic Tac Toe Game</StyledTitle>
-      <StyledTitle>🅾 or 🆇❓</StyledTitle>
+      <StyledTitle2>🅾 or 🆇❓</StyledTitle2>
       
       {/* status determined here */}
       <StyledStatus>{status}</StyledStatus>
@@ -169,7 +195,7 @@ function CellBoxGrid({
           {fillCellBox(8)}
         </StyledCellBoxGridRow>
       </StyledCellBoxGridContainer>
-      {/* starts game again by emptying all the button cell boxes to 9 empty strings in []*/}
+      {/* starts game again by emptying all the button cell boxes to 9 mpty strings in []*/}
       <StyledClearButton onClick={() => setCellBoxes(Array(9).fill(""))}>
         Clear Game
       </StyledClearButton>

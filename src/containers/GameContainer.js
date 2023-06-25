@@ -16,9 +16,12 @@ const GameContainer = () => {
 
     return (
         <>
+        {/* StyledGameContainerDiv is just to center stuff and apply CSS to everything */}
+        {/* <StyledGameContainerDiv> */}
                 {/* <h1>This is the GameContainer</h1> */}
                 {/* passing props to other component */}
             <CellBoxGrid cellBoxes={cellBoxes} setCellBoxes={setCellBoxes} xPlayerIsNext={xPlayerIsNext} setXPlayerIsNext={setXPlayerIsNext} winnerPlayer={winnerPlayer} setWinnerPlayer={setWinnerPlayer}/>
+        {/* </StyledGameContainerDiv> */}
         </>
     );
 };
