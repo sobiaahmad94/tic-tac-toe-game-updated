@@ -7,8 +7,7 @@ import styled from "styled-components";
 const StyledTitle = styled.h1`
     text-align: center;
     margin: 0;
-    padding: 20;
-    font-size: 65px;
+    font-size: 45px;
 `;
 
 // second line
@@ -16,10 +15,25 @@ const StyledTitle2 = styled.h1`
     color: rgb(51, 153, 204);
     text-align: center;
     margin: 0;
-    padding: 20;
-    font-size: 60px;
-
+    font-size: 45px;
 `;
+
+// draw pencil sentence
+const StyledDrawSentence = styled.h1`
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin: 0;
+    font-size: 24px;
+`;
+
+// draw pencil sentence
+const StyledPlayersTurnSentence = styled.h1`
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin: 0;
+    font-size: 24px;
+`;
+
 
 const StyledStatus = styled.div`
     text-align: center;
@@ -44,7 +58,7 @@ const StyledCellBoxGridRow = styled.div`
 //     align-items: center;
 
 const StyledClearButton = styled.button`
-    margin-top: 10px;
+    margin: 10px;
     cursor: pointer;
     font-size: 19px;
     border-radius: 10px;
@@ -57,10 +71,15 @@ const StyledClearButton = styled.button`
 `;
 
 const StyledPlayAgainButton = styled.button`
-    margin-top: 10px;
+    margin: 10px;
     cursor: pointer;
     font-size: 19px;
     border-radius: 10px;
+
+:hover {
+    background-color: rgb(51, 153, 204);
+
+}
 
 `;
 
@@ -162,10 +181,10 @@ function CellBoxGrid({
 
 const winner = figureOutWinner(cellBoxes); // checking if there's a winner by looking at current state of cellBoxes
 const status = winner
-    ? `Congratulations team ${winner}! Player ${winner} is the winner :)` // decides on what player wins and what message should be shown, depending on who wins
+    ? <StyledPlayersTurnSentence>Congratulations team {winner}! Player {winner} is the winner :)</StyledPlayersTurnSentence> // decides on what player wins and what message should be shown, depending on who wins
     : checkDraw() // draw check added
-    ? `Grab a pencil... it's a draw! ✏️` 
-    : `Next player: ${xPlayerIsNext ? "X" : "O"}`;
+    ? <StyledDrawSentence>Grab a pencil... it's a draw! ✏️</StyledDrawSentence> 
+    : <StyledPlayersTurnSentence>Next player: {xPlayerIsNext ? "X" : "O"}</StyledPlayersTurnSentence>;
 
   return (
     <>
